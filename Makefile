@@ -6,6 +6,7 @@ OBJ_DIR := build
 
 CXX := g++
 CXXFLAGS := -std=c++17 -O2 -Wall -Wextra -I$(SRC_DIR)
+LDFLAGS := -lncurses
 
 CHARA_SRCS := $(wildcard $(SRC_DIR)/character/*.cc)
 CHARA_OBJS := $(patsubst $(SRC_DIR)/character/%.cc,$(OBJ_DIR)/character/%.o,$(CHARA_SRCS))
@@ -28,11 +29,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cc
 $(OBJ_DIR)/character/%.o: $(SRC_DIR)/character/%.cc
 	@mkdir -p $(OBJ_DIR)/character
 	$(CXX) $(CXXFLAGS) -I$(SRC_DIR) -c $< -o $@
+
 $(OBJ_DIR)/stage/%.o: $(SRC_DIR)/stage/%.cc
 	@mkdir -p $(OBJ_DIR)/stage
 	$(CXX) $(CXXFLAGS) -I$(SRC_DIR) -c $< -o $@
 $(TARGET): $(CHARA_OBJS) $(STAGE_OBJS) $(OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 clean:
 	rm -rf $(OBJ_DIR) $(TARGET)
 .PHONY: all clean

@@ -1,6 +1,10 @@
 #pragma once
 
-#include <iostream>
+#include <ncurses.h>  // for mvaddch, printw, etc.
+
+// helper to draw a character at (x,y) using ncurses.
+// curses uses (row, col) == (y, x).
+inline void DrawAtPoint(int x, int y, char ch = ' ') { mvaddch(x, y, ch); }
 
 class Block {
  public:
@@ -17,5 +21,3 @@ class Block {
   int x_;
   int y_;
 };
-
-extern std::ostream& DrawAtPoint(std::ostream& os, int x, int y, char spare = ' ');

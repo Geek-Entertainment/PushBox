@@ -17,9 +17,9 @@ Space& Space::operator=(const Space& space) {
 
 void Space::Draw() {
   if (start_box_) {
-    DrawAtPoint(std::cout, x_, y_, 'B') << std::flush;
+    DrawAtPoint(x_, y_, 'B');
   } else {
-    DrawAtPoint(std::cout, x_, y_, ' ') << std::flush;
+    DrawAtPoint(x_, y_, ' ');
   }
 }
 
