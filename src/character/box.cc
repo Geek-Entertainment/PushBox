@@ -1,4 +1,5 @@
 #include <character/box.h>
+#include <ncurses.h>
 
 Box::Box() : Block() {}
 
@@ -13,6 +14,6 @@ Box& Box::operator=(const Box& box) {
   return *this;
 }
 
-void Box::Draw() { DrawAtPoint(std::cout, x_, y_, '#') << std::flush; }
+void Box::Draw() { DrawAtPoint(x_, y_, '#'); }
 
 void Box::Show() { Draw(); }

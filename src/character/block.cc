@@ -13,8 +13,3 @@ Block& Block::operator=(const Block& block) {
   }
   return *this;
 }
-
-std::ostream& DrawAtPoint(std::ostream& os, int x, int y, char spare) {
-  os << "\033[" << y << ";" << x << "H" << spare;
-  return os;
-}

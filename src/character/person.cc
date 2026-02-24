@@ -1,4 +1,5 @@
 #include <character/person.h>
+#include <ncurses.h>
 
 Person::Person() : Block() {}
 
@@ -13,6 +14,6 @@ Person& Person::operator=(const Person& person) {
   return *this;
 }
 
-void Person::Draw() { DrawAtPoint(std::cout, x_, y_, 'P') << std::flush; }
+void Person::Draw() { DrawAtPoint(x_, y_, 'P'); }
 
 void Person::Show() { Draw(); }

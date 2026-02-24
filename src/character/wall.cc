@@ -1,4 +1,5 @@
 #include <character/wall.h>
+#include <ncurses.h>
 
 Wall::Wall() : Block() {}
 
@@ -13,6 +14,6 @@ Wall& Wall::operator=(const Wall& wall) {
   return *this;
 }
 
-void Wall::Draw() { DrawAtPoint(std::cout, x_, y_, '0') << std::flush; }
+void Wall::Draw() { DrawAtPoint(x_, y_, '0'); }
 
 void Wall::Show() { Draw(); }

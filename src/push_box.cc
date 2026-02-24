@@ -1,8 +1,44 @@
+#include <ncurses.h>
+#include <stage/map_file.h>
 #include <stage/stage.h>
-
 int main() {
+  initscr();
+  cbreak();
+  noecho();
+  keypad(stdscr, TRUE);
+  refresh();
   Stage stage;
-  stage.Init();
+  stage.MapRead(MapFile().Read("maps/map1.txt"));
   stage.Show();
+
+  int ch;
+  while ((ch = getch()) != 'q') {
+    switch (ch) {
+      case KEY_UP:
+        stage.RunUp();
+        stage.Show();
+        break;
+      case KEY_DOWN:
+        stage.RunDown();
+        stage.Show();
+        break;
+      case KEY_LEFT:
+        stage.RunLeft();
+        stage.Show();
+        break;
+      case KEY_RIGHT:
+        stage.RunRight();
+        stage.Show();
+        break;
+      default:
+        break;
+    }
+
+    // show the prompt after re-rendering (cursor automatically at last used
+    // position)
+    printw("\nPress arrow or 'q' to quit (last code %d)\n", ch);
+    refresh();  // 刷新屏幕以显示新内容
+  }
+  endwin();
   return 0;
 }
