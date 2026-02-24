@@ -6,7 +6,7 @@ OBJ_DIR := build
 
 CXX := g++
 CXXFLAGS := -std=c++17 -O2 -Wall -Wextra -I$(SRC_DIR)
-LDFLAGS := -lncurses
+LDFLAGS := -lncurses -lgflags
 
 CHARA_SRCS := $(wildcard $(SRC_DIR)/character/*.cc)
 CHARA_OBJS := $(patsubst $(SRC_DIR)/character/%.cc,$(OBJ_DIR)/character/%.o,$(CHARA_SRCS))

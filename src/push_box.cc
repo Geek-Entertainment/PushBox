@@ -1,18 +1,26 @@
+#include <gflags/gflags.h>
 #include <ncurses.h>
 #include <stage/map_file.h>
 #include <stage/stage.h>
-int main() {
+
+DEFINE_string(map, "maps/map1.txt", "Path to the map file to load");
+
+int main(int argc, char** argv) {
+  gflags::ParseCommandLineFlags(&argc, &argv, true);
   initscr();
   cbreak();
   noecho();
   keypad(stdscr, TRUE);
   refresh();
   Stage stage;
-  stage.MapRead(MapFile().Read("maps/map1.txt"));
+  stage.MapRead(MapFile().Read(FLAGS_map));
   stage.Show();
 
   int ch;
-  while ((ch = getch()) != 'q') {
+  while ((ch = getch()) != ERR) {
+    if (ch == 'q' || ch == 'Q' || ch == 27) {
+      break;
+    }
     switch (ch) {
       case KEY_UP:
         stage.RunUp();
